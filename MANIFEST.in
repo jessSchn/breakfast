@@ -1,0 +1,3 @@
+include breakfast/config/deployment.ini_tmpl
+recursive-include breakfast/public *
+recursive-include breakfast/templates *
