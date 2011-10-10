@@ -18,7 +18,7 @@
 # 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.            
 
 from sqlalchemy import Column, ForeignKey
-from sqlalchemy.types import Integer, String, Enum, Boolean
+from sqlalchemy.types import Integer, String, Boolean, Text
 from sqlalchemy.orm import relation, backref
 
 from Crypto.Hash import SHA256
@@ -28,7 +28,7 @@ from breakfast.model.meta import Base
 class Author(Base):
     __tablename__ = "authors"
 
-    id = Column(Integer, index = True))
+    id = Column(Integer, index = True)
     username = Column(String(255), primary_key = True)
     email = Column(String(255))
     grader = Column(Boolean)
@@ -36,7 +36,7 @@ class Author(Base):
     admin = Column(Boolean)
 
     @property
-    def passowrd(self):
+    def password(self):
         return _password
 
     @password.setter
@@ -46,5 +46,5 @@ class Author(Base):
         _password = cypher.digest()
 
     def __repr__(self):
-        return "<Tag('%s')>" % self.name
+        return "<Author('%s')>" % self.name
 

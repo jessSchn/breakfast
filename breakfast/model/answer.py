@@ -18,7 +18,7 @@
 # 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.            
 
 from sqlalchemy import Column, ForeignKey
-from sqlalchemy.types import Integer, String, Enum
+from sqlalchemy.types import Integer, String, Text
 from sqlalchemy.orm import relation, backref
 
 from breakfast.model.meta import Base
@@ -26,16 +26,16 @@ from breakfast.model.meta import Base
 class Answer(Base):
     __tablename__ = "answers"
 
-    id = Column(Integer, primary_key = True))
+    id = Column(Integer, primary_key = True)
     check_script = Column(Text)
     answer = Column(String(255))
     
     author_id = Column(Integer, ForeignKey('authors.id'))
     author = relation('Author', backref = backref('answers'))
 
-    question_id = Column(Integer, ForeignKey('question.id'), index = True)
+    question_id = Column(Integer, ForeignKey('questions.id'), index = True)
     question = relation('Question', backref = backref('answers'))
 
     def __repr__(self):
-        return "<Tag('%s')>" % self.name
+        return "<Answer('%s')>" % self.name
 

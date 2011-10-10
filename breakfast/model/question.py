@@ -21,16 +21,16 @@ from sqlalchemy import Column, ForeignKey, Table
 from sqlalchemy.types import Integer, String, Enum, Text
 from sqlalchemy.orm import relation, backref
 
-from breakfast.model.meta import Base, metadata
+from breakfast.model.meta import Base
 
-tests_questions_table = Table('tests_questions', metadata, 
-        Column('test_id', Integer, ForeignKey('test.id', onupdate = "CASCADE", ondelete = "CASCADE")),
-        Column('question_id', Integer, ForeignKey('question.id', onupdate = "CASCADE", ondelete = "RESTRICT")),
+tests_questions_table = Table('tests_questions', Base.metadata, 
+        Column('test_id', Integer, ForeignKey('tests.id', onupdate = "CASCADE", ondelete = "CASCADE")),
+        Column('question_id', Integer, ForeignKey('questions.id', onupdate = "CASCADE", ondelete = "RESTRICT")),
         )
 
-questions_tags_table = Table('questions_tags', metadata,
-        Column('question_id', Integer, ForeignKey('question.id', onupdate = "CASCADE", ondelete = "CASCADE")),
-        Column('tag_id', Integer, ForeignKey('tag.id', onupdate = "CASCADE", ondelete = "CASCADE")),
+questions_tags_table = Table('questions_tags', Base.metadata,
+        Column('question_id', Integer, ForeignKey('questions.id', onupdate = "CASCADE", ondelete = "CASCADE")),
+        Column('tag_id', Integer, ForeignKey('tags.id', onupdate = "CASCADE", ondelete = "CASCADE")),
         )
 
 class Question(Base):
@@ -39,7 +39,7 @@ class Question(Base):
     id = Column(Integer, primary_key = True)
     question = Column(String(255))
     break_script = Column(Text)
-    rating = Column(Enum("-", None, "+"), index = True)
+    rating = Column(Enum("-", "0", "+"), index = True)
     up_votes = Column(Integer)
     down_votes = Column(Integer)
 

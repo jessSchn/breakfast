@@ -26,9 +26,9 @@ from breakfast.model.meta import Base
 class Tag(Base):
     __tablename__ = "tags"
 
-    id = Column(Integer, index = True))
+    id = Column(Integer, index = True)
     name = Column(String(255), primary_key = True)
-    level = Column(Enum(None, 1, 2, 3), index = True)
+    level = Column(Enum("0", "1", "2", "3"), index = True)
 
     def __repr__(self):
         return "<Tag('%s')>" % self.name
