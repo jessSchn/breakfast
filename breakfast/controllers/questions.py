@@ -28,13 +28,13 @@ class QuestionsController(BaseController):
         question = Question()
         Session.add(question)
         Session.commit()
-        redirect_to('show_page', id = question.id)
+        redirect(url(controller='questions', action='show', id = question.id))
 
     def save(self, id):
         question = self.question_q.filter_by(id = id).first()
         question.question = escape(request.POST.getone("question"))
         Session.commit()
-        redirect_to('show_page', id = question.id)
+        redirect(url(controller='questions', action='show', id = question.id))
 
     def delete(self, id):
         question = self.question_q.filter_by(id = id).first()
