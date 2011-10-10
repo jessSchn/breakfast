@@ -17,39 +17,25 @@
 # Free Software Foundation, Inc.,                                      
 # 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.            
 
-from sqlalchemy import Column, ForeignKey, Table
-from sqlalchemy.types import Integer, String, Enum, Text
+from sqlalchemy import Column, ForeignKey
+from sqlalchemy.types import Integer, String, Enum
 from sqlalchemy.orm import relation, backref
 
-from breakfast.model.meta import Base, metadata
+from breakfast.model.meta import Base
 
-tests_questions_table = Table('tests_questions', metadata, 
-        Column('test_id', Integer, ForeignKey('test.id', onupdate = "CASCADE", ondelete = "CASCADE")),
-        Column('question_id', Integer, ForeignKey('question.id', onupdate = "CASCADE", ondelete = "RESTRICT")),
-        )
+class Answer(Base):
+    __tablename__ = "answers"
 
-questions_tags_table = Table('questions_tags', metadata,
-        Column('question_id', Integer, ForeignKey('question.id', onupdate = "CASCADE", ondelete = "CASCADE")),
-        Column('tag_id', Integer, ForeignKey('tag.id', onupdate = "CASCADE", ondelete = "CASCADE")),
-        )
-
-class Question(Base):
-    __tablename__ = "questions"
-
-    id = Column(Integer, primary_key = True)
-    question = Column(String(255))
-    break_script = Column(Text)
-    rating = Column(Enum("-", None, "+"), index = True)
-    up_votes = Column(Integer)
-    down_votes = Column(Integer)
-
+    id = Column(Integer, primary_key = True))
+    check_script = Column(Text)
+    answer = Column(String(255))
+    
     author_id = Column(Integer, ForeignKey('authors.id'))
-    author = relation('Author', backref = backref('questions'))
+    author = relation('Author', backref = backref('answers'))
 
-    tests = relation('Test', secondary = tests_questions_table, backref = 'questions')
-
-    tags = relation('Tag', secondary = questions_tags_table, backref = 'questions')
+    question_id = Column(Integer, ForeignKey('question.id'), index = True)
+    question = relation('Question', backref = backref('answers'))
 
     def __repr__(self):
-        return "<Question('%s')>" % self.question
+        return "<Tag('%s')>" % self.name
 
