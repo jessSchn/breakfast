@@ -15,13 +15,13 @@ class QuestionsController(BaseController):
 
     def index(self):
         c.questions = self.question_q.all()
-        return render('/questions/index.genshi')
+        return render('questions/index.genshi')
 
     def show(self, id):
         question = self.question_q.filter_by(id = id).first()
         if question:
             c.question = question
-            return render('/questions/show.genshi')
+            return render('questions/show.genshi')
         abort(404)
 
     def create(self):
@@ -40,5 +40,5 @@ class QuestionsController(BaseController):
         question = self.question_q.filter_by(id = id).first()
         Session.delete(question)
         Session.commit()
-        redirect_to('questions')
+        redirect(url(controller='questions', action='index'))
 

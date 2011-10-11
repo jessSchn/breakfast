@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:py="http://genshi.edgewall.org/"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  lang="en"
+  py:strip="">
+  <head py:match="head" py:attrs="select('@*')">
+    <!-- Put any HEAD tags which all pages should have here. -->
+    <meta py:replace="select('*|text()')" />
+  </head>
+  <body py:match="body" py:attrs="select('@*')">
+    <!-- Put anything that should appear before the page content here (e.g., logo, menu, left sidebar) -->
+
+    <div py:replace="select('*|text()')">This page has no content.</div>
+
+    <!-- Put anything that should appear after the page content here (e.g., page footer, copyright, "Contact Us" link). -->
+  </body>
+</html>
+
