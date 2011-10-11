@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:py="http://genshi.edgewall.org/"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  lang="en">
+  <xi:include href="base.genshi" />
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>Question: ${c.question.question[:10]} ...</title>
+  </head>
+  <body>
+    <ul class="question">
+      <li>Q: ${question.question}</li>
+      <ul py:if="len(c.question.answers)">
+        <li py:for="answer in c.question.answers">
+          <ul class="answer">
+            <li>A: ${answer.answer}</li>
+          </ul>
+        </li>
+      </ul>
+      <li><a href="/questions/up/${question.id}">+</a></li>
+      <li><a href="/questions/down/${question.id}">-</a></li>
+    </ul>
+  </body>
+</html>
+

@@ -9,7 +9,16 @@
     <title>Morning Breakfast Questions</title>
   </head>
   <body>
-    <p>Under construction.</p>
+    <ol py:if="c.questions">
+      <li py:for="question in c.questions">
+        <ul class="question">
+          <li>Q: ${question.question}</li>
+          <li>A: <a href="/questions/show/${question.id}">...</a></li>
+          <li><a href="/questions/up/${question.id}">+</a></li>
+          <li><a href="/questions/down/${question.id}">-</a></li>
+        </ul>
+      </li>
+    </ol>
   </body>
 </html>
 

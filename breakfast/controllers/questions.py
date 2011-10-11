@@ -26,11 +26,12 @@ class QuestionsController(BaseController):
 
     def create(self):
         question = Question()
+        question.question = escape(request.POST.getone("question"))
         Session.add(question)
         Session.commit()
         redirect(url(controller='questions', action='show', id = question.id))
 
-    def save(self, id):
+    def update(self, id):
         question = self.question_q.filter_by(id = id).first()
         question.question = escape(request.POST.getone("question"))
         Session.commit()

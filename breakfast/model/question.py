@@ -37,7 +37,7 @@ class Question(Base):
     __tablename__ = "questions"
 
     id = Column(Integer, primary_key = True)
-    question = Column(String(255))
+    question = Column(String(255), nullable = False)
     break_script = Column(Text)
     rating = Column(Enum("-", "0", "+"), index = True)
     up_votes = Column(Integer)
