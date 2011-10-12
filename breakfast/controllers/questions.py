@@ -31,6 +31,7 @@ class QuestionsController(BaseController):
         question = Question()
         question.question = request.params["question"]
         question.break_script = request.params["break_script"]
+        question.author_id = 1 # TODO Remove this ASAP
         Session.add(question)
         Session.commit()
         redirect(url(controller='questions', action='show', id = question.id))
@@ -46,4 +47,16 @@ class QuestionsController(BaseController):
         Session.delete(question)
         Session.commit()
         redirect(url(controller='questions', action='index'))
+
+    def up(self, id):
+        question = self.question_q.filter_by(id = id).first()
+        question.vote_up()
+        Session.commit()
+        redirect(url(controller='questions', action='show', id = question.id))
+
+    def down(self, id):
+        question = self.question_q.filter_by(id = id).first()
+        question.vote_down()
+        Session.commit()
+        redirect(url(controller='questions', action='show', id = question.id))
 

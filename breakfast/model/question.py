@@ -24,8 +24,8 @@ from sqlalchemy.orm import relation, backref
 from breakfast.model.meta import Base
 
 tests_questions_table = Table('tests_questions', Base.metadata, 
-        Column('test_id', Integer, ForeignKey('tests.id', onupdate = "CASCADE", ondelete = "CASCADE")),
-        Column('question_id', Integer, ForeignKey('questions.id', onupdate = "CASCADE", ondelete = "RESTRICT")),
+        Column('test_id', Integer, ForeignKey('tests.id', onupdate = "CASCADE", ondelete = "CASCADE"), nullable = False),
+        Column('question_id', Integer, ForeignKey('questions.id', onupdate = "CASCADE", ondelete = "RESTRICT"), nullable = False),
         )
 
 questions_tags_table = Table('questions_tags', Base.metadata,
@@ -39,16 +39,48 @@ class Question(Base):
     id = Column(Integer, primary_key = True)
     question = Column(String(255), nullable = False)
     break_script = Column(Text)
-    rating = Column(Enum("-", "0", "+"), index = True)
-    up_votes = Column(Integer)
-    down_votes = Column(Integer)
+    _rating = Column(Enum("-", "0", "+"), index = True, default = "0", nullable = False)
+    _up_votes = Column(Integer, default = 0, nullable = False)
+    _down_votes = Column(Integer, default = 0, nullable = False)
 
-    author_id = Column(Integer, ForeignKey('authors.id'))
+    author_id = Column(Integer, ForeignKey('authors.id'), nullable = False)
     author = relation('Author', backref = backref('questions'))
 
     tests = relation('Test', secondary = tests_questions_table, backref = 'questions')
 
     tags = relation('Tag', secondary = questions_tags_table, backref = 'questions')
+
+    @property
+    def rating(self):
+        return self._rating
+
+    @property
+    def up_votes(self):
+        return self._up_votes
+
+    @property
+    def down_votes(self):
+        return self._down_votes
+
+    def vote_up(self):
+        self._up_votes += 1
+        self._update_rating()
+
+    def vote_down(self):
+        self._down_votes += 1
+        self._update_rating()
+
+    def _update_rating(self):
+        delta = self.up_votes - self.down_votes
+
+        window_size = 10
+
+        if delta > window_size:
+            self._rating = "+"
+        elif delta < -window_size:
+            self._rating = "-"
+        else:
+            self._rating = "0"
 
     def __repr__(self):
         return "<Question('%s')>" % self.question

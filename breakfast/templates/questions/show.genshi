@@ -18,6 +18,7 @@
           </ul>
         </li>
       </ul>
+      <li>Rating: ${c.question.rating}</li>
       <li><a href="/questions/up/${c.question.id}">+</a></li>
       <li><a href="/questions/down/${c.question.id}">-</a></li>
     </ul>

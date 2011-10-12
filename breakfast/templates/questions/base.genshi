@@ -8,11 +8,23 @@
     <meta py:replace="select('*|text()')" />
   </head>
   <body py:match="body" py:attrs="select('@*')">
-    <!-- Put anything that should appear before the page content here (e.g., logo, menu, left sidebar) -->
+    <div class="header">
+    </div>
 
     <div py:replace="select('*|text()')">This page has no content.</div>
 
-    <!-- Put anything that should appear after the page content here (e.g., page footer, copyright, "Contact Us" link). -->
+    <div class="left_sidebar">
+      <ul class="navigation_bar">
+      </ul>
+      <div class="search">
+      </div>
+      <div class="test_form">
+      </div>
+      <div class="notification_area">
+      </div>
+      <div class="footer">
+      </div>
+    </div>
   </body>
 </html>
 
