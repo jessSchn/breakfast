@@ -4,6 +4,7 @@ from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 
 from breakfast.lib.base import BaseController, render, Session
+from breakfast.lib.helpers import escape
 from breakfast.model import Question
 
 log = logging.getLogger(__name__)
@@ -29,8 +30,8 @@ class QuestionsController(BaseController):
 
     def create(self):
         question = Question()
-        question.question = request.params["question"]
-        question.break_script = request.params["break_script"]
+        question.question = escape(request.params["question"])
+        question.break_script = escape(request.params["break_script"])
         question.author_id = 1 # TODO Remove this ASAP
         Session.add(question)
         Session.commit()
@@ -38,7 +39,7 @@ class QuestionsController(BaseController):
 
     def update(self, id):
         question = self.question_q.filter_by(id = id).first()
-        question.question = request.params["question"]
+        question.question = escape(request.params["question"])
         Session.commit()
         redirect(url(controller='questions', action='show', id = question.id))
 
