@@ -4,6 +4,7 @@ Provides the BaseController class for subclassing.
 """
 from pylons.controllers import WSGIController
 from pylons.templating import render_genshi as render
+from pylons.decorators import validate
 
 from breakfast.model.meta import Session
 

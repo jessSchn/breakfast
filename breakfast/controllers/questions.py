@@ -3,9 +3,10 @@ import logging
 from pylons import request, response, session, tmpl_context as c, url
 from pylons.controllers.util import abort, redirect
 
-from breakfast.lib.base import BaseController, render, Session
-from breakfast.lib.helpers import escape
+from breakfast.lib.base import BaseController, render, Session, validate
 from breakfast.model import Question
+
+from breakfast.model.form import QuestionForm
 
 log = logging.getLogger(__name__)
 
@@ -28,10 +29,11 @@ class QuestionsController(BaseController):
     def new(self):
         return render('questions/new.genshi')
 
+    @validate(schema=QuestionForm(), form='new')
     def create(self):
         question = Question()
-        question.question = escape(request.params["question"])
-        question.break_script = escape(request.params["break_script"])
+        question.question = request.params["question"]
+        question.break_script = request.params["break_script"]
         question.author_id = 1 # TODO Remove this ASAP
         Session.add(question)
         Session.commit()
@@ -39,7 +41,7 @@ class QuestionsController(BaseController):
 
     def update(self, id):
         question = self.question_q.filter_by(id = id).first()
-        question.question = escape(request.params["question"])
+        question.question = request.params["question"]
         Session.commit()
         redirect(url(controller='questions', action='show', id = question.id))
 
