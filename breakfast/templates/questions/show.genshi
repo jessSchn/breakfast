@@ -10,7 +10,7 @@
   </head>
   <body>
     <ul class="question">
-      <li>Q: ${question.question}</li>
+      <li>Q: ${c.question.question}</li>
       <ul py:if="len(c.question.answers)">
         <li py:for="answer in c.question.answers">
           <ul class="answer">
@@ -18,8 +18,8 @@
           </ul>
         </li>
       </ul>
-      <li><a href="/questions/up/${question.id}">+</a></li>
-      <li><a href="/questions/down/${question.id}">-</a></li>
+      <li><a href="/questions/up/${c.question.id}">+</a></li>
+      <li><a href="/questions/down/${c.question.id}">-</a></li>
     </ul>
   </body>
 </html>

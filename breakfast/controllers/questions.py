@@ -24,16 +24,20 @@ class QuestionsController(BaseController):
             return render('questions/show.genshi')
         abort(404)
 
+    def new(self):
+        return render('questions/new.genshi')
+
     def create(self):
         question = Question()
-        question.question = escape(request.POST.getone("question"))
+        question.question = request.params["question"]
+        question.break_script = request.params["break_script"]
         Session.add(question)
         Session.commit()
         redirect(url(controller='questions', action='show', id = question.id))
 
     def update(self, id):
         question = self.question_q.filter_by(id = id).first()
-        question.question = escape(request.POST.getone("question"))
+        question.question = request.params["question"]
         Session.commit()
         redirect(url(controller='questions', action='show', id = question.id))
 
