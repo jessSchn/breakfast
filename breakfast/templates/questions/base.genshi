@@ -5,27 +5,39 @@
   py:strip="">
   <head py:match="head" py:attrs="select('@*')">
     <!-- Put any HEAD tags which all pages should have here. -->
+    <link rel="stylesheet" href="/css/normalize.css" media="all" type="text/css" />    
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
     <meta py:replace="select('*|text()')" />
-  </head>
+   
+ </head>
   <body py:match="body" py:attrs="select('@*')">
-    <div class="header">
+    <div id="header">
+        <div class="logo">
+        </div>
+        <div class="navigation">
+        </div>
     </div>
 
-    <div py:replace="select('*|text()')">This page has no content.</div>
-
-    <div class="left_sidebar">
-      <ul class="navigation_bar">
-        <li><a href="${h.url(controller='questions', action='new')}">Add Question</a></li>
-      </ul>
-      <div class="search">
-      </div>
-      <div class="test_form">
-      </div>
-      <div class="notification_area">
-      </div>
-      <div class="footer">
-      </div>
+    <div id="content">
+       <div class="left_sidebar">
+           <div py:replace="select('*|text()')">This page has no content.</div>
+       </div>
+       <div class="right_sidebar">
+         <ul class="navigation_bar">
+           <li><a href="${h.url(controller='questions', action='new')}">Add Question</a></li>
+         </ul>
+         <div class="search">
+         </div>
+         <div class="test_form">
+         </div>
+         <div class="notification_area">
+         </div>
+      </div><!--end right_sidebar-->
+    </div><!--end content-->
+   
+    <div id="footer">
     </div>
+
   </body>
 </html>
 
