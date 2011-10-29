@@ -9,14 +9,14 @@ body {width:920px; margin: 0 auto;}
 
 
 /*------Header-------*/
-#header{background-color:green; height:100px;}
+#header{background-image:url(../images/breakfast_header.jpg); height:151px;}
 
 /*--Nav--*/
 .navigation{width:350px; float:right; height:30px; border:1px solid #fff; margin: 10px;}
 
 
 /*------Content--------*/
-#content{background-color:red; padding:30px 20px; display:inline-block; width:880px;}
+#content{background-color:#f7ec86; border-top:1px solid #ead22e; padding:30px 20px; display:inline-block; width:880px;}
 
 /*--Left Column--*/
 .left_sidebar{width:450px; float:left; border:1px solid #fff;}
