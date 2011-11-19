@@ -5,27 +5,27 @@
 */
 
 /*---Resets---*/
-body {width:920px; margin: 0 auto;}
+body {width:920px; margin: 0 auto; background-color:#f6f6f6;}
 
 
 /*------Header-------*/
-#header{background-image:url(../images/breakfast_header.jpg); height:151px;}
+#header{background-image:url(../images/breakfast.jpg); border-left:1px solid #ffcc66; border-right:1px solid #ffcc66; height:200px;}
 
 /*--Nav--*/
 .navigation{width:350px; float:right; height:30px; border:1px solid #fff; margin: 10px;}
 
 
 /*------Content--------*/
-#content{background-color:#f7ec86; border-top:1px solid #ead22e; padding:30px 20px; display:inline-block; width:880px;}
+#content{background-color:#fffbf3; border-left:1px solid #ffcc66; border-right:1px solid #ffcc66; padding:30px 20px; display:inline-block; width:878px;}
 
 /*--Left Column--*/
-.left_sidebar{width:450px; float:left; border:1px solid #fff;}
+.left_sidebar{width:449px; float:left; border:1px solid #fff;}
 
 /*--Right Column--*/
-.right_sidebar{width:425px; float:right; border:1px solid #000;}
+.right_sidebar{width:424px; float:right; border:1px solid #000;}
 
 /*------Footer------*/
-#footer{background-color:blue; height:100px;}
+#footer{background-color:#fffbf3; border-left:1px solid #ffcc66; border-right:1px solid #ffcc66; border-bottom:1px solid #ffcc66; height:50px;margin-top:-5px;}
 
 
 /*------Font-------*/
